@@ -2,7 +2,7 @@ zh_CN:
   site_settings:
     lottery_enabled: "启用抽奖插件"
     lottery_min_participants_global: "全局最低参与人数"
-    lottery_post_lock_delay_minutes: "帖子锁定延迟时间（分钟）"
+    lottery_post_lock_delay_minutes: "帖子锁定延迟时间（分钟，0表示立即锁定）"
     lottery_excluded_groups: "排除参与的用户组"
     lottery_categories: "允许抽奖的分类"
     lottery_max_concurrent: "最大同时进行的抽奖数量"
