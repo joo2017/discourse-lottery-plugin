@@ -1,0 +1,38 @@
+plugins:
+  lottery_enabled:
+    default: true
+    description: "启用或禁用抽奖插件功能"
+    
+  lottery_min_participants_global:
+    default: 5
+    min: 1
+    max: 1000
+    description: "全局最低参与人数限制"
+    
+  lottery_post_lock_delay_minutes:
+    default: 30
+    min: 0
+    max: 10080
+    description: "抽奖帖子锁定延迟时间（分钟），0表示立即锁定"
+    
+  lottery_excluded_groups:
+    type: group_list
+    default: "staff|moderators"
+    description: "排除参与抽奖的用户组列表"
+    
+  lottery_categories:
+    type: category_list
+    default: ""
+    description: "允许创建抽奖的分类列表，为空表示所有分类都允许"
+    
+  lottery_max_concurrent:
+    default: 10
+    min: 1
+    max: 100
+    description: "最大同时进行的抽奖数量"
+    
+  lottery_max_winner_count:
+    default: 20
+    min: 1
+    max: 100
+    description: "单次抽奖最大获奖人数"
