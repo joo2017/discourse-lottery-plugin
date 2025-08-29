@@ -26,6 +26,7 @@ module DiscourseLottery
           end
           
           schedule_jobs!
+          handle_immediate_lock!
           add_lottery_tag!
         end
         
@@ -111,28 +112,25 @@ module DiscourseLottery
     end
     
     def schedule_jobs!
-      # 取消旧的任务
-      if @editing
-        cancel_existing_jobs!
-      end
-      
-      # 安排开奖任务
-      Jobs.enqueue_at(@lottery.draw_time, :execute_lottery_draw, lottery_id: @lottery.id)
-      
-      # 安排锁定任务
-      lock_delay = SiteSetting.lottery_post_lock_delay_minutes
-      if lock_delay > 0
-        lock_time = Time.current + lock_delay.minutes
-        Jobs.enqueue_at(lock_time, :lock_lottery_post, lottery_id: @lottery.id)
-      else
-        # 立即锁定
-        @lottery.lock!
-      end
+      # 现在使用定时任务，不需要手动调度特定任务
+      # 定时任务会自动检查和处理到期的抽奖
+      Rails.logger.info("抽奖 ID: #{@lottery.id} 将由定时任务在开奖时间自动处理")
     end
     
-    def cancel_existing_jobs!
-      # 这里需要取消之前安排的任务
-      # Sidekiq 不直接支持取消特定任务，需要使用其他方法
+    def handle_immediate_lock!
+      # 如果延迟时间为0，立即锁定
+      lock_delay = SiteSetting.lottery_post_lock_delay_minutes
+      if lock_delay <= 0 && !@editing
+        @lottery.lock!
+        
+        # 锁定主题的第一个帖子
+        first_post = @lottery.topic.first_post
+        if first_post
+          first_post.update!(locked_by_id: Discourse.system_user.id)
+        end
+        
+        Rails.logger.info("抽奖 ID: #{@lottery.id} 已立即锁定")
+      end
     end
     
     def add_lottery_tag!
