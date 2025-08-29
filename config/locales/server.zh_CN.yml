@@ -1,0 +1,88 @@
+zh_CN:
+  site_settings:
+    lottery_enabled: "启用抽奖插件"
+    lottery_min_participants_global: "全局最低参与人数"
+    lottery_post_lock_delay_minutes: "帖子锁定延迟时间（分钟）"
+    lottery_excluded_groups: "排除参与的用户组"
+    lottery_categories: "允许抽奖的分类"
+    lottery_max_concurrent: "最大同时进行的抽奖数量"
+    lottery_max_winner_count: "单次抽奖最大获奖人数"
+  
+  lottery:
+    errors:
+      disabled: "抽奖功能已禁用"
+      not_found: "抽奖活动不存在"
+      cannot_cancel: "无法取消此抽奖活动"
+      creation_failed: "抽奖创建失败：%{error}。请 @%{username} 检查并重新创建。"
+      draw_time_must_be_future: "开奖时间必须是未来时间"
+      invalid_time_format: "开奖时间格式无效"
+      winner_count_too_high: "获奖人数不能超过 %{max} 人"
+      min_participants_too_low: "最少参与人数不能低于 %{min} 人"
+      specific_floors_required: "指定楼层开奖时必须填写楼层号"
+      specific_floors_invalid: "指定楼层格式无效"
+      too_many_specific_floors: "指定楼层数量不能超过 %{max} 个"
+      invalid_floor_numbers: "楼层号必须大于1"
+      duplicate_floor_numbers: "楼层号不能重复"
+      floor_format_invalid: "楼层号格式错误"
+      invalid_draw_time: "开奖时间格式无效"
+    
+    success:
+      created: "抽奖活动创建成功"
+      cancelled: "抽奖活动已取消"
+    
+    cancellation:
+      insufficient_participants: "参与人数不足（需要 %{required} 人，实际 %{actual} 人）"
+      no_valid_floors: "所有指定楼层都无效"
+      cancelled_by_user: "用户主动取消"
+      system_error: "系统错误"
+    
+    announcement:
+      winners: |
+        ## 🎉 抽奖结果公布
+        
+        **活动名称：** %{lottery_name}
+        
+        **中奖名单：**
+        %{winners_list}
+        
+        **总参与人数：** %{total_participants} 人
+        
+        恭喜各位获奖者！请注意查收私信通知。
+      
+      cancelled: |
+        ## ❌ 抽奖活动已取消
+        
+        **活动名称：** %{lottery_name}
+        **取消原因：** %{reason}
+        **总参与人数：** %{total_participants} 人
+        
+        感谢大家的参与！
+      
+      user_cancelled: |
+        ## ❌ 抽奖活动已取消
+        
+        **活动名称：** %{lottery_name}
+        
+        活动创建者已主动取消此次抽奖活动。
+    
+    notification:
+      winner_title: "🎉 恭喜您在抽奖活动「%{name}」中获奖！"
+      winner_message: |
+        亲爱的 @%{username}，
+        
+        恭喜您在抽奖活动「**%{lottery_name}**」中获奖！
+        
+        **获奖奖品：** %{prize}
+        
+        请点击以下链接查看详情：
+        %{topic_url}
+        
+        请联系活动组织者领取奖品。再次恭喜您！
+      
+      post_locked_title: "抽奖帖子已锁定"
+      post_locked_message: |
+        您创建的抽奖活动「**%{lottery_name}**」已过了编辑期限，帖子现已锁定。
+        
+        活动详情：%{topic_url}
+        
+        如需修改，请联系管理员。
