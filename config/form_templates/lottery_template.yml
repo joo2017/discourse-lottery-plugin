@@ -1,0 +1,89 @@
+name: "抽奖活动模板"
+template: |
+  - type: checkbox
+    id: is_lottery
+    attributes:
+      label: "这是一个抽奖活动"
+      value: "true"
+    validations:
+      required: true
+
+  - type: input
+    id: lottery_name
+    attributes:
+      label: "活动名称"
+      placeholder: "请输入抽奖活动名称"
+      maxlength: 255
+    validations:
+      required: true
+
+  - type: textarea
+    id: lottery_prize
+    attributes:
+      label: "奖品说明"
+      placeholder: "详细描述您的奖品"
+      rows: 3
+    validations:
+      required: true
+
+  - type: upload
+    id: lottery_prize_image
+    attributes:
+      label: "奖品图片（可选）"
+      file_types: "jpg,jpeg,png,gif"
+      max_file_size_mb: 10
+
+  - type: datetime
+    id: lottery_draw_time
+    attributes:
+      label: "开奖时间"
+    validations:
+      required: true
+
+  - type: input
+    id: lottery_winner_count
+    attributes:
+      label: "获奖人数"
+      type: "number"
+      min: 1
+      max: 20
+      value: 1
+    validations:
+      required: true
+
+  - type: input
+    id: lottery_specific_floors
+    attributes:
+      label: "指定中奖楼层（可选）"
+      placeholder: "例如：8, 18, 28"
+      description: "填写此项将覆盖随机抽奖。请在此填写具体的楼层号，用英文逗号分隔。"
+
+  - type: input
+    id: lottery_min_participants
+    attributes:
+      label: "参与门槛"
+      type: "number"
+      min: 5
+      value: 5
+    validations:
+      required: true
+
+  - type: dropdown
+    id: lottery_backup_strategy
+    attributes:
+      label: "后备策略"
+      none_label: "请选择"
+    choices:
+      - id: "continue"
+        label: "当开奖时人数不足，继续开奖"
+      - id: "cancel"
+        label: "当开奖时人数不足，取消活动"
+    validations:
+      required: true
+
+  - type: textarea
+    id: lottery_description
+    attributes:
+      label: "补充说明（可选）"
+      placeholder: "可选，添加活动的详细说明"
+      rows: 4
